@@ -282,12 +282,13 @@ async function carregarPerfil() {
       );
     if (foto) {
       if (perfil.photoUrl) {
-        foto.src =
-          perfil.photoUrl;
+        foto.src = perfil.photoUrl;
+        foto.alt =
+          perfil.fullName ||
+          "Perfil SINTELE";
+      } else {
+        foto.style.display = "none";
       }
-      foto.alt =
-        perfil.fullName ||
-        "Perfil SINTELE";
     }
     if (nome) {
       nome.textContent =
