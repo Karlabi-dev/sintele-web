@@ -260,13 +260,25 @@ async function carregarPerfil() {
         "profissaoInfo"
       );
     if (foto) {
-      if (perfil.photoUrl) {
-        foto.src = perfil.photoUrl;
-        foto.alt =
-          perfil.fullName ||
-          "Perfil SINTELE";
+  const fotoContainer =
+    foto.closest(".foto-container");
+
+  if (perfil.photoUrl) {
+    foto.src = perfil.photoUrl;
+    foto.alt =
+      perfil.fullName ||
+      "Perfil SINTELE";
+    foto.style.display = "";
+
+    if (fotoContainer) {
+      fotoContainer.style.display = "";
+    }
       } else {
-        foto.style.display = "none";
+        if (fotoContainer) {
+          fotoContainer.style.display = "none";
+        } else {
+          foto.style.display = "none";
+        }
       }
     }
     if (nome) {
