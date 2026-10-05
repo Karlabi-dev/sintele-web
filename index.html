@@ -11,36 +11,41 @@
       content="Perfil profissional digital no SINTELE."
     />
     <title>SINTELE | Perfil profissional</title>
-    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="/style.css"
+    />
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-M535DTRC1Q"
     ></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
+      window.dataLayer =
+        window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-      gtag("config", "G-M535DTRC1Q");
+      gtag(
+        "config",
+        "G-M535DTRC1Q"
+      );
     </script>
   </head>
   <body>
     <main class="perfil">
       <header class="cabecalho">
-        <div class="marca">
-          <div class="marca-principal">
-            <img
-              src="assets/logo.png"
-              alt="Logo SINTELE"
-              class="logo"
-            />
-            <div class="marca-texto">
-              <h1>SINTELE</h1>
-              <p>
-                Identidade profissional digital
-              </p>
-            </div>
+        <div class="marca-principal">
+          <img
+            src="/assets/logo.png"
+            alt="Logo SINTELE"
+            class="logo"
+          />
+          <div class="marca-texto">
+            <h1>SINTELE</h1>
+            <p>
+              Identidade profissional digital
+            </p>
           </div>
         </div>
         <div class="nfc-status">
@@ -54,25 +59,32 @@
         </div>
       </header>
       <section class="card card-perfil">
-      <div class="perfil-conteudo">
-        <div class="foto-container">
-          <img
-            id="fotoPerfil"
-            alt="Foto de perfil"
-            class="foto"
-            style="display: none;"
-          />
-          <span class="selo-verificado">
-            ✓
-          </span>
+        <div class="perfil-conteudo">
+          <div
+            class="foto-container"
+            id="fotoContainer"
+          >
+            <img
+              id="fotoPerfil"
+              alt="Foto de perfil"
+              class="foto"
+            />
+            <span
+              class="selo-verificado"
+              aria-label="Perfil verificado"
+            >
+              ✓
+            </span>
+          </div>
+          <div class="dados-perfil">
+            <h2 id="nomePerfil">
+              Carregando...
+            </h2>
+            <h3 id="profissaoPerfil"></h3>
+            <strong id="empresaPerfil"></strong>
+            <p id="bioPerfil"></p>
+          </div>
         </div>
-        <div class="dados-perfil">
-          <h2 id="nomePerfil"></h2>
-          <h3 id="profissaoPerfil"></h3>
-          <strong id="empresaPerfil"></strong>
-          <p id="bioPerfil"></p>
-        </div>
-      </div>
         <div class="acoes">
           <button
             type="button"
@@ -114,80 +126,90 @@
           </a>
         </div>
       </section>
-      <section class="card card-informacoes">
-        <div class="titulo-card">
-          <span class="titulo-icone">
-            💼
-          </span>
-          <h2>
-            Informações profissionais
-          </h2>
-        </div>
-        <div class="informacoes-grid">
-          <div class="informacao">
-            <span class="informacao-icone">
-              ◉
+      <div class="cards-dupla">
+        <section class="card card-informacoes">
+          <div class="titulo-card">
+            <span class="titulo-icone">
+              💼
             </span>
-            <div>
-              <small>
-                Empresa
-              </small>
-              <strong id="empresaInfo"></strong>
+            <h2>
+              Informações profissionais
+            </h2>
+          </div>
+          <div class="informacoes-grid">
+            <div class="informacao">
+              <span class="informacao-icone">
+                ◉
+              </span>
+              <div>
+                <small>
+                  Empresa
+                </small>
+                <strong id="empresaInfo">
+                  Não informado
+                </strong>
+              </div>
+            </div>
+            <div class="informacao">
+              <span class="informacao-icone">
+                ♙
+              </span>
+              <div>
+                <small>
+                  Cargo
+                </small>
+                <strong id="cargoInfo">
+                  Não informado
+                </strong>
+              </div>
+            </div>
+            <div class="informacao">
+              <span class="informacao-icone">
+                ♧
+              </span>
+              <div>
+                <small>
+                  Localização
+                </small>
+                <strong id="localizacaoInfo">
+                  Não informado
+                </strong>
+              </div>
+            </div>
+            <div class="informacao">
+              <span class="informacao-icone">
+                &lt;/&gt;
+              </span>
+              <div>
+                <small>
+                  Profissão
+                </small>
+                <strong id="profissaoInfo">
+                  Não informado
+                </strong>
+              </div>
             </div>
           </div>
-          <div class="informacao">
-            <span class="informacao-icone">
-              ♙
+        </section>
+        <section
+          class="card card-redes"
+          id="cardRedes"
+          style="display: none;"
+        >
+          <div class="titulo-card">
+            <span class="titulo-icone">
+              🔗
             </span>
-            <div>
-              <small>
-                Cargo
-              </small>
-              <strong id="cargoInfo"></strong>
-            </div>
+            <h2>
+              Redes profissionais
+            </h2>
           </div>
-          <div class="informacao">
-            <span class="informacao-icone">
-              ♧
-            </span>
-            <div>
-              <small>
-                Localização
-              </small>
-              <strong id="localizacaoInfo"></strong>
-            </div>
-          </div>
-          <div class="informacao">
-            <span class="informacao-icone">
-              &lt;/&gt;
-            </span>
-            <div>
-              <small>
-                Profissão
-              </small>
-              <strong id="profissaoInfo"></strong>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section
-        class="card card-redes"
-        id="cardRedes"
-        style="display: none;"
-      >
-        <div class="titulo-card">
-          <span class="titulo-icone">
-            🔗
-          </span>
-          <h2>
-            Redes profissionais
-          </h2>
-        </div>
-        <div
-          class="redes-grid"
-          id="redesGrid"
-        ></div>
-      </section>
+          <div
+            class="redes-grid"
+            id="redesGrid"
+          ></div>
+        </section>
+      </div>
       <section class="card card-projetos">
         <div class="projetos-topo">
           <div class="titulo-card">
@@ -206,15 +228,19 @@
             class="ver-todos"
           >
             Ver todos
-            <span>
-              ›
-            </span>
+            <span>›</span>
           </a>
         </div>
         <div
           class="projetos-grid"
           id="projetosGrid"
         ></div>
+        <div
+          id="semProjetos"
+          class="sem-projetos"
+        >
+          Nenhum projeto em destaque.
+        </div>
       </section>
       <section class="card card-cta">
         <div class="cta-icone">
@@ -225,12 +251,11 @@
             Gostou do SINTELE?
           </h2>
           <p>
-            Tenha sua própria identidade profissional digital e faça parte dessa
-            rede de conexões.
+            Tenha sua própria identidade profissional digital e faça parte dessa rede de conexões.
           </p>
         </div>
         <a
-          href="https://karlabi-dev.github.io/sintele-app/"
+          href="https://sintele.vercel.app"
           target="_blank"
           rel="noopener noreferrer"
           class="botao-download"
@@ -253,7 +278,7 @@
     </main>
     <script
       type="module"
-      src="script.js"
+      src="/script.js"
     ></script>
   </body>
 </html>
