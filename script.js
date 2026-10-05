@@ -5,18 +5,6 @@ import {
   runTransaction,
   onValue,
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
-const firebaseConfig = {
-  apiKey: "AIzaSyDgOC4ng6X2zdUn3e4TY8s9CsRRhhsVVLc",
-  authDomain: "sintele-tech.firebaseapp.com",
-  databaseURL: "https://sintele-tech-default-rtdb.firebaseio.com/",
-  projectId: "sintele-tech",
-  storageBucket: "sintele-tech.firebasestorage.app",
-  messagingSenderId: "592273613215",
-  appId: "1:592273613215:web:848d8f085c1fe9d3af9daa",
-  measurementId: "G-JHVMP8F8SC",
-};
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
 const API_URL =
   "https://sintele-api.onrender.com/api";
 const caminho =
@@ -25,36 +13,39 @@ const partes =
   caminho
     .split("/")
     .filter(Boolean);
+const ultimoSegmento =
+  partes[partes.length - 1];
 const username =
-  partes.length > 1 &&
-  partes[partes.length - 1] === "sintele-web"
-    ? "karla-bianca"
-    : decodeURIComponent(
-        partes[partes.length - 1] ||
-        "karla-bianca"
-      );
-let perfil = null;
-const contato = {
-  nome: "",
-  empresa: "",
-  cargo: "",
-  telefone: "",
-  email: "",
-  site: "",
-  linkedin: "",
-  instagram: "",
-  github: "",
-  youtube: "",
+  ultimoSegmento &&
+  ultimoSegmento !== "sintele-web"
+    ? decodeURIComponent(ultimoSegmento)
+    : "karla-bianca";
+const firebaseConfig = {
+  apiKey: "AIzaSyB1J5QXb9L0w9k1dQX0x9V5xJ5x5x5x5x",
+  authDomain: "sintele-tech.firebaseapp.com",
+  databaseURL:
+    "https://sintele-tech-default-rtdb.firebaseio.com",
+  projectId: "sintele-tech",
+  storageBucket: "sintele-tech.firebasestorage.app",
+  messagingSenderId: "1055586324567",
+  appId:
+    "1:1055586324567:web:0000000000000000000000",
 };
-function getNomeRede(platform) {
-  const nomes = {
-    linkedin: "LinkedIn",
-    instagram: "Instagram",
-    github: "GitHub",
-    youtube: "YouTube",
-  };
-  return nomes[platform] || platform;
-}
+const app =
+  initializeApp(firebaseConfig);
+const database =
+  getDatabase(app);
+const contato = {
+  whatsapp: "",
+  phone: "",
+  email: "",
+};
+const redesNomes = {
+  linkedin: "LinkedIn",
+  instagram: "Instagram",
+  github: "GitHub",
+  youtube: "YouTube",
+};
 function getIconeRede(platform) {
   const icones = {
     linkedin: "assets/icons/linkedin.png",
@@ -62,232 +53,206 @@ function getIconeRede(platform) {
     github: "assets/icons/github.png",
     youtube: "assets/icons/youtube.png",
   };
-  return icones[platform] || "assets/icons/redes.png";
+  return (
+    icones[platform] ||
+    "assets/icons/redes.png"
+  );
 }
-function renderizarRedesSociais(redesSociais) {
-  const cardRedes =
-    document.getElementById("cardRedes");
-  const redesGrid =
-    document.getElementById("redesGrid");
-  if (!cardRedes || !redesGrid) {
-    return;
+function formatarTelefone(numero) {
+  if (!numero) {
+    return "";
   }
-  redesGrid.innerHTML = "";
-  cardRedes.style.display = "none";
-  const redesAtivas =
-    Array.isArray(redesSociais)
-      ? redesSociais.filter((rede) => {
-          if (
-            !rede ||
-            !rede.platform ||
-            !rede.url
-          ) {
-            return false;
-          }
-          if (
-            rede.is_active !== undefined &&
-            rede.is_active !== true
-          ) {
-            return false;
-          }
-          return true;
-        })
-      : [];
-  if (redesAtivas.length === 0) {
-    return;
+  const somenteNumeros =
+    numero.replace(/\D/g, "");
+  if (
+    somenteNumeros.length === 11
+  ) {
+    return `(${somenteNumeros.slice(
+      0,
+      2
+    )}) ${somenteNumeros.slice(
+      2,
+      7
+    )}-${somenteNumeros.slice(7)}`;
   }
-  redesAtivas.forEach((rede) => {
-    const link =
-      document.createElement("a");
-    link.href =
-      rede.url.trim();
-    link.target =
-      "_blank";
-    link.rel =
-      "noopener noreferrer";
-    link.className =
-      "rede";
-    const icone =
-      document.createElement("div");
-    icone.className =
-      `rede-icone ${rede.platform}`;
-    const imagem =
-      document.createElement("img");
-    imagem.src =
-      getIconeRede(
-        rede.platform
-      );
-    imagem.alt =
-      getNomeRede(
-        rede.platform
-      );
-    imagem.loading =
-      "lazy";
-    imagem.onerror =
-      function () {
-        this.style.display =
-          "none";
-      };
-    icone.appendChild(
-      imagem
-    );
-    const nome =
-      document.createElement("span");
-    nome.textContent =
-      getNomeRede(
-        rede.platform
-      );
-    link.appendChild(
-      icone
-    );
-    link.appendChild(
-      nome
-    );
-    redesGrid.appendChild(
-      link
-    );
-  });
-  cardRedes.style.display =
-    "";
+  return numero;
 }
 function configurarWhatsApp(numero) {
-  const botaoWhatsApp =
+  const botao =
     document.getElementById(
       "botaoWhatsApp"
     );
-  if (!botaoWhatsApp) {
+  if (!botao) {
     return;
   }
-  botaoWhatsApp.style.display =
-    "none";
   if (!numero) {
+    botao.style.display = "none";
     return;
   }
-  let numeroLimpo =
-    String(numero).replace(
-      /\D/g,
-      ""
+  const numeroLimpo =
+    numero.replace(/\D/g, "");
+  botao.style.display = "";
+  botao.onclick = () => {
+    const url =
+      `https://wa.me/55${numeroLimpo}`;
+    window.open(
+      url,
+      "_blank",
+      "noopener,noreferrer"
     );
-  if (!numeroLimpo) {
+  };
+}
+function renderizarRedes(socialLinks) {
+  const card =
+    document.getElementById(
+      "cardRedes"
+    );
+  const grid =
+    document.getElementById(
+      "redesGrid"
+    );
+  if (!card || !grid) {
     return;
   }
+  grid.innerHTML = "";
   if (
-    !numeroLimpo.startsWith("55")
+    !socialLinks ||
+    socialLinks.length === 0
   ) {
-    numeroLimpo =
-      `55${numeroLimpo}`;
+    card.style.display = "none";
+    return;
   }
-  botaoWhatsApp.href =
-    `https://wa.me/${numeroLimpo}`;
-  botaoWhatsApp.target =
-    "_blank";
-  botaoWhatsApp.rel =
-    "noopener noreferrer";
-  botaoWhatsApp.style.display =
-    "";
+  card.style.display = "block";
+  socialLinks.forEach((rede) => {
+    if (!rede.platform || !rede.url) {
+      return;
+    }
+    const plataforma =
+      rede.platform.toLowerCase();
+    const nome =
+      redesNomes[plataforma] ||
+      plataforma;
+    let url = rede.url.trim();
+    if (
+      plataforma === "instagram" &&
+      !url.startsWith("http")
+    ) {
+      url =
+        `https://instagram.com/${url.replace(
+          /^@/,
+          ""
+        )}`;
+    }
+    if (
+      plataforma === "linkedin" &&
+      !url.startsWith("http")
+    ) {
+      url =
+        `https://www.linkedin.com/in/${url.replace(
+          /^@/,
+          ""
+        )}`;
+    }
+    if (
+      plataforma === "github" &&
+      !url.startsWith("http")
+    ) {
+      url =
+        `https://github.com/${url.replace(
+          /^@/,
+          ""
+        )}`;
+    }
+    if (
+      plataforma === "youtube" &&
+      !url.startsWith("http")
+    ) {
+      url =
+        `https://youtube.com/${url}`;
+    }
+    const link =
+      document.createElement("a");
+    link.className =
+      `rede ${plataforma}`;
+    link.href = url;
+    link.target = "_blank";
+    link.rel =
+      "noopener noreferrer";
+    const icone =
+      document.createElement("div");
+    icone.className =
+      "rede-icone";
+    const imagem =
+      document.createElement("img");
+    imagem.src =
+      getIconeRede(plataforma);
+    imagem.alt =
+      nome;
+    imagem.style.width =
+      "100%";
+    imagem.style.height =
+      "100%";
+    imagem.style.objectFit =
+      "contain";
+    imagem.style.padding =
+      "10px";
+    icone.appendChild(imagem);
+    const texto =
+      document.createElement("span");
+    texto.textContent =
+      nome;
+    link.appendChild(icone);
+    link.appendChild(texto);
+    grid.appendChild(link);
+  });
+  if (!grid.children.length) {
+    card.style.display = "none";
+  }
 }
 async function carregarPerfil() {
   try {
-    const response =
+    const resposta =
       await fetch(
-        `${API_URL}/public/professional/${encodeURIComponent(username)}`,
-        {
-          method: "GET",
-          headers: {
-            Accept:
-              "application/json",
-          },
-        }
+        `${API_URL}/public/professional/${encodeURIComponent(
+          username
+        )}`
       );
-    let data = null;
-    try {
-      data =
-        await response.json();
-    } catch {
-      data = null;
-    }
-    if (!response.ok) {
+    if (!resposta.ok) {
       throw new Error(
-        data?.error ||
-        "Erro ao carregar perfil."
+        `Erro HTTP ${resposta.status}`
       );
     }
-    if (!data || !data.profile) {
-      throw new Error(
-        "Perfil não encontrado."
-      );
-    }
-    perfil =
-      data.profile;
+    const dados =
+      await resposta.json();
+    const perfil =
+      dados.profile || {};
     const contatos =
-      data.contacts || {};
-    const redesSociais =
-      Array.isArray(
-        data.socialLinks
-      )
-        ? data.socialLinks
-        : [];
-    renderizarRedesSociais(
-      redesSociais
-    );
-    contato.linkedin = "";
-    contato.instagram = "";
-    contato.github = "";
-    contato.youtube = "";
-    redesSociais.forEach(
-      (rede) => {
-        if (
-          !rede ||
-          !rede.platform ||
-          !rede.url
-        ) {
-          return;
-        }
-        if (
-          Object.prototype.hasOwnProperty.call(
-            contato,
-            rede.platform
-          )
-        ) {
-          contato[
-            rede.platform
-          ] =
-            rede.url;
-        }
-      }
-    );
-    contato.nome =
-      perfil.fullName || "";
-    contato.empresa =
-      perfil.companyName || "";
-    contato.cargo =
-      perfil.jobTitle ||
-      perfil.profession ||
-      "";
-    contato.telefone =
-      contatos.whatsapp ||
-      contatos.phone ||
-      "";
+      dados.contacts || {};
+    const socialLinks =
+      dados.socialLinks || [];
+    contato.whatsapp =
+      contatos.whatsapp || "";
+    contato.phone =
+      contatos.phone || "";
     contato.email =
-      contatos.email ||
-      "";
-    const fotoPerfil =
+      contatos.email || "";
+    const foto =
       document.getElementById(
         "fotoPerfil"
       );
-    const nomePerfil =
+    const nome =
       document.getElementById(
         "nomePerfil"
       );
-    const profissaoPerfil =
+    const profissao =
       document.getElementById(
         "profissaoPerfil"
       );
-    const empresaPerfil =
+    const empresa =
       document.getElementById(
         "empresaPerfil"
       );
-    const bioPerfil =
+    const bio =
       document.getElementById(
         "bioPerfil"
       );
@@ -307,235 +272,307 @@ async function carregarPerfil() {
       document.getElementById(
         "profissaoInfo"
       );
-    if (
-      fotoPerfil &&
-      perfil.photoUrl
-    ) {
-      fotoPerfil.src =
-        perfil.photoUrl;
-      fotoPerfil.alt =
+    if (foto) {
+      if (perfil.photoUrl) {
+        foto.src =
+          perfil.photoUrl;
+      }
+      foto.alt =
         perfil.fullName ||
-        "Foto de perfil";
+        "Perfil SINTELE";
     }
-    if (nomePerfil) {
-      nomePerfil.textContent =
-        perfil.fullName || "";
+    if (nome) {
+      nome.textContent =
+        perfil.fullName ||
+        "Nome não informado";
     }
-    if (profissaoPerfil) {
-      profissaoPerfil.textContent =
+    if (profissao) {
+      profissao.textContent =
         perfil.jobTitle ||
         perfil.profession ||
         "";
     }
-    if (empresaPerfil) {
-      empresaPerfil.textContent =
-        perfil.companyName || "";
+    if (empresa) {
+      empresa.textContent =
+        perfil.companyName ||
+        "";
     }
-    if (bioPerfil) {
-      bioPerfil.textContent =
-        perfil.bio || "";
+    if (bio) {
+      bio.textContent =
+        perfil.bio ||
+        "";
     }
     if (empresaInfo) {
       empresaInfo.textContent =
-        perfil.companyName || "";
+        perfil.companyName ||
+        "Não informado";
     }
     if (cargoInfo) {
       cargoInfo.textContent =
         perfil.jobTitle ||
         perfil.profession ||
-        "";
+        "Não informado";
     }
     if (localizacaoInfo) {
       const cidade =
         perfil.city || "";
       const estado =
         perfil.state || "";
-      if (
-        cidade &&
-        estado
-      ) {
-        localizacaoInfo.textContent =
-          `${cidade}, ${estado}`;
-      } else {
-        localizacaoInfo.textContent =
-          cidade ||
-          estado ||
-          "";
-      }
+      const localizacao =
+        [cidade, estado]
+          .filter(Boolean)
+          .join(" - ");
+      localizacaoInfo.textContent =
+        localizacao ||
+        "Não informado";
     }
     if (profissaoInfo) {
       profissaoInfo.textContent =
-        perfil.profession || "";
+        perfil.profession ||
+        perfil.jobTitle ||
+        "Não informado";
     }
-    configurarWhatsApp(
-      contatos.whatsapp
-    );
     document.title =
       perfil.fullName
         ? `${perfil.fullName} | SINTELE`
         : "SINTELE";
-    return perfil;
+    configurarWhatsApp(
+      contato.whatsapp
+    );
+    renderizarRedes(
+      socialLinks
+    );
+    configurarPerfilCompleto(
+      perfil
+    );
+    configurarSalvarContato(
+      perfil
+    );
+    configurarContatoTelefone();
+    configurarEmail();
   } catch (error) {
     console.error(
-      "ERRO AO CARREGAR PERFIL:",
+      "Erro ao carregar perfil:",
       error
     );
-    const nomePerfil =
+    const nome =
       document.getElementById(
         "nomePerfil"
       );
-    const bioPerfil =
+    const profissao =
+      document.getElementById(
+        "profissaoPerfil"
+      );
+    const empresa =
+      document.getElementById(
+        "empresaPerfil"
+      );
+    const bio =
       document.getElementById(
         "bioPerfil"
       );
-    if (nomePerfil) {
-      nomePerfil.textContent =
+    if (nome) {
+      nome.textContent =
         "Perfil não encontrado";
     }
-    if (bioPerfil) {
-      bioPerfil.textContent =
-        "Não foi possível carregar este perfil.";
+    if (profissao) {
+      profissao.textContent =
+        "";
     }
-    return null;
+    if (empresa) {
+      empresa.textContent =
+        "";
+    }
+    if (bio) {
+      bio.textContent =
+        "";
+    }
   }
 }
-const visualizacoesRef =
-  ref(
-    database,
-    "sintele/visualizacoes"
-  );
-const jaVisitou =
-  localStorage.getItem(
-    "sintele_visitou"
-  );
-if (!jaVisitou) {
-  runTransaction(
-    visualizacoesRef,
-    (valorAtual) => {
-      return (
-        (valorAtual || 0) + 1
-      );
-    }
-  );
-  localStorage.setItem(
-    "sintele_visitou",
-    "true"
-  );
+function configurarPerfilCompleto(
+  perfil
+) {
+  const botao =
+    document.getElementById(
+      "botaoPerfilCompleto"
+    );
+  if (!botao) {
+    return;
+  }
+  if (!perfil.username) {
+    botao.style.display = "none";
+    return;
+  }
+  botao.href =
+    `https://karlabi-dev.github.io/sintele-app/`;
 }
-const contadorVisualizacoes =
-  document.getElementById(
-    "contadorVisualizacoes"
-  );
-if (contadorVisualizacoes) {
+function configurarContatoTelefone() {
+  const telefone =
+    document.querySelector(
+      '[data-contato="telefone"]'
+    );
+  if (!telefone) {
+    return;
+  }
+  if (!contato.phone) {
+    telefone.style.display = "none";
+    return;
+  }
+  telefone.textContent =
+    formatarTelefone(
+      contato.phone
+    );
+  telefone.href =
+    `tel:${contato.phone.replace(
+      /\D/g,
+      ""
+    )}`;
+}
+function configurarEmail() {
+  const email =
+    document.querySelector(
+      '[data-contato="email"]'
+    );
+  if (!email) {
+    return;
+  }
+  if (!contato.email) {
+    email.style.display = "none";
+    return;
+  }
+  email.textContent =
+    contato.email;
+  email.href =
+    `mailto:${contato.email}`;
+}
+function configurarSalvarContato(
+  perfil
+) {
+  const botao =
+    document.getElementById(
+      "salvarContato"
+    );
+  if (!botao) {
+    return;
+  }
+  botao.onclick = () => {
+    const nome =
+      perfil.fullName ||
+      "Contato SINTELE";
+    const telefone =
+      contato.phone ||
+      contato.whatsapp ||
+      "";
+    const email =
+      contato.email ||
+      "";
+    const vcard =
+      [
+        "BEGIN:VCARD",
+        "VERSION:3.0",
+        `FN:${nome}`,
+        telefone
+          ? `TEL;TYPE=CELL:${telefone}`
+          : "",
+        email
+          ? `EMAIL:${email}`
+          : "",
+        `URL:https://karlabi-dev.github.io/sintele-web/${encodeURIComponent(
+          perfil.username ||
+            username
+        )}`,
+        "END:VCARD",
+      ]
+        .filter(Boolean)
+        .join("\n");
+    const blob =
+      new Blob(
+        [vcard],
+        {
+          type:
+            "text/vcard;charset=utf-8",
+        }
+      );
+    const url =
+      URL.createObjectURL(blob);
+    const link =
+      document.createElement("a");
+    link.href = url;
+    link.download =
+      `${nome.replace(
+        /\s+/g,
+        "-"
+      )}.vcf`;
+    document.body.appendChild(
+      link
+    );
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  };
+}
+function configurarContador() {
+  const contador =
+    document.getElementById(
+      "contadorVisualizacoes"
+    );
+  if (!contador) {
+    return;
+  }
+  const caminhoContador =
+    ref(
+      database,
+      "sintele/visualizações"
+    );
+  const chaveVisitante =
+    `sintele-visitou-${username}`;
+  const jaVisitou =
+    sessionStorage.getItem(
+      chaveVisitante
+    );
+  if (!jaVisitou) {
+    runTransaction(
+      caminhoContador,
+      (valorAtual) => {
+        return (
+          (valorAtual || 0) + 1
+        );
+      }
+    );
+    sessionStorage.setItem(
+      chaveVisitante,
+      "true"
+    );
+  }
   onValue(
-    visualizacoesRef,
+    caminhoContador,
     (snapshot) => {
-      const quantidade =
+      const valor =
         snapshot.val() || 0;
-      contadorVisualizacoes.textContent =
-        `👁 ${quantidade} visualizações`;
+      contador.textContent =
+        `${valor} visualizações`;
     }
   );
 }
-const botaoSalvarContato =
-  document.getElementById(
-    "salvarContato"
-  );
-if (botaoSalvarContato) {
-  botaoSalvarContato.addEventListener(
-    "click",
-    function () {
-      const vCard =
-`BEGIN:VCARD
-VERSION:3.0
-FN:${contato.nome}
-ORG:${contato.empresa}
-TITLE:${contato.cargo}
-TEL;TYPE=CELL:${contato.telefone}
-EMAIL:${contato.email}
-URL:${contato.site}
-X-SOCIALPROFILE;TYPE=linkedin:${contato.linkedin}
-X-SOCIALPROFILE;TYPE=instagram:${contato.instagram}
-X-SOCIALPROFILE;TYPE=github:${contato.github}
-X-SOCIALPROFILE;TYPE=youtube:${contato.youtube}
-END:VCARD`;
-      const arquivo =
-        new Blob(
-          [vCard],
-          {
-            type:
-              "text/vcard;charset=utf-8",
-          }
-        );
-      const url =
-        URL.createObjectURL(
-          arquivo
-        );
-      const link =
-        document.createElement(
-          "a"
-        );
-      link.href =
-        url;
-      const nomeArquivo =
-        contato.nome
-          .trim()
-          .replace(
-            /\s+/g,
-            "-"
-          )
-          .replace(
-            /[^a-zA-Z0-9À-ÿ-]/g,
-            ""
-          );
-      link.download =
-        `${
-          nomeArquivo ||
-          "contato"
-        }.vcf`;
-      document.body.appendChild(
-        link
-      );
-      link.click();
-      document.body.removeChild(
-        link
-      );
-      URL.revokeObjectURL(
-        url
-      );
-    }
-  );
-}
-const botoes =
-  document.querySelectorAll(
-    ".botao"
-  );
-botoes.forEach(
-  function (botao) {
+function configurarEfeitosBotoes() {
+  const botoes =
+    document.querySelectorAll(
+      "button, .botao, .botao-download"
+    );
+  botoes.forEach((botao) => {
     botao.addEventListener(
-      "mousedown",
-      function () {
+      "click",
+      () => {
         botao.style.transform =
           "scale(0.97)";
+        setTimeout(() => {
+          botao.style.transform =
+            "";
+        }, 120);
       }
     );
-    botao.addEventListener(
-      "mouseup",
-      function () {
-        botao.style.transform =
-          "";
-      }
-    );
-    botao.addEventListener(
-      "mouseleave",
-      function () {
-        botao.style.transform =
-          "";
-      }
-    );
-  }
-);
-console.log(
-  `SINTELE — Carregando perfil: ${username}`
-);
+  });
+}
 carregarPerfil();
+configurarContador();
+configurarEfeitosBotoes();
