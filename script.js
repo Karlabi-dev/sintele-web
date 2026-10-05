@@ -591,5 +591,4 @@ function configurarEfeitosBotoes() {
   });
 }
 carregarPerfil();
-configurarContador();
 configurarEfeitosBotoes();
