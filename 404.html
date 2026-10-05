@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>SINTELE</title>
+
+    <script>
+      const caminho =
+        window.location.pathname;
+
+      const partes =
+        caminho
+          .split("/")
+          .filter(Boolean);
+
+      const username =
+        partes.length > 1
+          ? partes[partes.length - 1]
+          : "";
+
+      const base =
+        "/sintele-web/";
+
+      if (username) {
+        window.location.replace(
+          `${base}?username=${encodeURIComponent(
+            username
+          )}`
+        );
+      } else {
+        window.location.replace(
+          base
+        );
+      }
+    </script>
+  </head>
+
+  <body>
+    <p>Carregando perfil SINTELE...</p>
+  </body>
+</html>

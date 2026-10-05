@@ -15,11 +15,21 @@ const partes =
     .filter(Boolean);
 const ultimoSegmento =
   partes[partes.length - 1];
+const parametros =
+  new URLSearchParams(
+    window.location.search
+  );
+
+const usernameUrl =
+  parametros.get("username");
+
 const username =
   ultimoSegmento &&
   ultimoSegmento !== "sintele-web"
-    ? decodeURIComponent(ultimoSegmento)
-    : "karla-bianca";
+    ? decodeURIComponent(
+        ultimoSegmento
+      )
+    : usernameUrl || "";
 const firebaseConfig = {
   apiKey: "AIzaSyB1J5QXb9L0w9k1dQX0x9V5xJ5x5x5x5x",
   authDomain: "sintele-tech.firebaseapp.com",
