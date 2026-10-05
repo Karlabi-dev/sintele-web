@@ -86,8 +86,15 @@ function configurarWhatsApp(numero) {
   const numeroLimpo =
     numero.replace(/\D/g, "");
   botao.style.display = "";
-  botao.href =
-    `https://wa.me/55${numeroLimpo}`;
+  botao.removeAttribute("href");
+
+botao.onclick = (event) => {
+    event.preventDefault();
+
+    alert(
+        "O aplicativo SINTELE ainda está em desenvolvimento. Em breve estará disponível para download."
+    );
+};
   botao.target = "_blank";
   botao.rel =
     "noopener noreferrer";
