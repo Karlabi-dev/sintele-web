@@ -448,41 +448,200 @@ function configurarSalvarContato(
   };
 }
 function configurarProjetos(
-  perfil
+    perfil,
+    projetos
 ) {
-  const verTodos =
-    document.getElementById(
-      "verTodosProjetos"
-    );
-  const grid =
-    document.getElementById(
-      "projetosGrid"
-    );
-  const semProjetos =
-    document.getElementById(
-      "semProjetos"
-    );
-  if (!grid) {
-    return;
-  }
-  grid.innerHTML = "";
-  if (verTodos) {
-    if (perfil.allProjectsUrl) {
-      verTodos.href =
-        perfil.allProjectsUrl;
-      verTodos.style.display =
-        "";
-    } else {
-      verTodos.href =
-        `${SINTELE_APP_URL}`;
-      verTodos.style.display =
-        "";
+    const verTodos =
+        document.getElementById(
+            "verTodosProjetos"
+        );
+
+    const grid =
+        document.getElementById(
+            "projetosGrid"
+        );
+
+    const semProjetos =
+        document.getElementById(
+            "semProjetos"
+        );
+
+    if (!grid) {
+        return;
     }
-  }
-  if (semProjetos) {
-    semProjetos.style.display =
-      "block";
-  }
+
+    grid.innerHTML = "";
+
+    if (verTodos) {
+        if (perfil.allProjectsUrl) {
+            verTodos.href =
+                perfil.allProjectsUrl;
+
+            verTodos.style.display =
+                "";
+        } else {
+            verTodos.href =
+                `${SINTELE_APP_URL}`;
+
+            verTodos.style.display =
+                "";
+        }
+    }
+
+    if (
+        !projetos ||
+        projetos.length === 0
+    ) {
+        if (semProjetos) {
+            semProjetos.style.display =
+                "block";
+        }
+
+        return;
+    }
+
+    if (semProjetos) {
+        semProjetos.style.display =
+            "none";
+    }
+
+    projetos.forEach(
+        (projeto) => {
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+            card.className =
+                "projeto-card";
+
+            if (projeto.image_url) {
+                const imagem =
+                    document.createElement(
+                        "img"
+                    );
+
+                imagem.src =
+                    projeto.image_url;
+
+                imagem.alt =
+                    projeto.title ||
+                    "Projeto";
+
+                imagem.className =
+                    "projeto-imagem";
+
+                card.appendChild(
+                    imagem
+                );
+            }
+
+            const conteudo =
+                document.createElement(
+                    "div"
+                );
+
+            conteudo.className =
+                "projeto-conteudo";
+
+            const titulo =
+                document.createElement(
+                    "h3"
+                );
+
+            titulo.textContent =
+                projeto.title ||
+                "Projeto";
+
+            conteudo.appendChild(
+                titulo
+            );
+
+            if (
+                projeto.description
+            ) {
+                const descricao =
+                    document.createElement(
+                        "p"
+                    );
+
+                descricao.textContent =
+                    projeto.description;
+
+                conteudo.appendChild(
+                    descricao
+                );
+            }
+
+            const links =
+                document.createElement(
+                    "div"
+                );
+
+            links.className =
+                "projeto-links";
+
+            if (projeto.project_url) {
+                const linkProjeto =
+                    document.createElement(
+                        "a"
+                    );
+
+                linkProjeto.href =
+                    projeto.project_url;
+
+                linkProjeto.target =
+                    "_blank";
+
+                linkProjeto.rel =
+                    "noopener noreferrer";
+
+                linkProjeto.textContent =
+                    "Ver projeto";
+
+                links.appendChild(
+                    linkProjeto
+                );
+            }
+
+            if (projeto.github_url) {
+                const linkGithub =
+                    document.createElement(
+                        "a"
+                    );
+
+                linkGithub.href =
+                    projeto.github_url;
+
+                linkGithub.target =
+                    "_blank";
+
+                linkGithub.rel =
+                    "noopener noreferrer";
+
+                linkGithub.textContent =
+                    "GitHub";
+
+                links.appendChild(
+                    linkGithub
+                );
+            }
+
+            if (links.children.length) {
+                conteudo.appendChild(
+                    links
+                );
+            }
+
+            card.appendChild(
+                conteudo
+            );
+
+            grid.appendChild(
+                card
+            );
+        }
+    );
 }
 async function carregarPerfil() {
   try {
@@ -509,7 +668,9 @@ async function carregarPerfil() {
     const contatos =
       dados.contacts || {};
     const socialLinks =
-      dados.socialLinks || [];
+    dados.socialLinks || [];
+    const projetos =
+    dados.projects || [];
     contato.whatsapp =
       contatos.whatsapp || "";
     contato.phone =
@@ -631,7 +792,8 @@ async function carregarPerfil() {
     configurarContatoTelefone();
     configurarEmail();
     configurarProjetos(
-      perfil
+    perfil,
+    projetos
     );
   } catch (error) {
     console.error(
