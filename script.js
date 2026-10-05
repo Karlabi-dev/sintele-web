@@ -265,22 +265,50 @@ async function carregarPerfil() {
 
   if (perfil.photoUrl) {
     foto.src = perfil.photoUrl;
+
     foto.alt =
       perfil.fullName ||
       "Perfil SINTELE";
+
     foto.style.display = "";
 
     if (fotoContainer) {
       fotoContainer.style.display = "";
+      fotoContainer.classList.remove(
+        "foto-padrao"
+      );
+      fotoContainer.removeAttribute(
+        "data-inicial"
+      );
     }
-      } else {
-        if (fotoContainer) {
-          fotoContainer.style.display = "none";
-        } else {
-          foto.style.display = "none";
-        }
-      }
+  } else {
+    const nome =
+      perfil.fullName ||
+      "S";
+
+    const inicial =
+      nome.trim().charAt(0).toUpperCase();
+
+    foto.removeAttribute("src");
+
+    foto.alt = inicial;
+
+    foto.style.display = "none";
+
+    if (fotoContainer) {
+      fotoContainer.style.display = "flex";
+
+      fotoContainer.classList.add(
+        "foto-padrao"
+      );
+
+      fotoContainer.setAttribute(
+        "data-inicial",
+        inicial
+      );
     }
+  }
+}
     if (nome) {
       nome.textContent =
         perfil.fullName ||
