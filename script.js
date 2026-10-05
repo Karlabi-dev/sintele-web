@@ -520,57 +520,9 @@ function configurarSalvarContato(
     URL.revokeObjectURL(url);
   };
 }
-function configurarContador() {
-  const contador =
-    document.getElementById(
-      "contadorVisualizacoes"
-    );
-  if (!contador || !username) {
-    return;
-  }
-  const caminhoContador =
-    ref(
-      database,
-      `sintele/visualizacoes/${username}`
-    );
-  const chaveVisitante =
-    `sintele-visitou-${username}`;
-  const jaVisitou =
-    sessionStorage.getItem(
-      chaveVisitante
-    );
-  if (!jaVisitou) {
-    runTransaction(
-      caminhoContador,
-      (valorAtual) => {
-        return (
-          (valorAtual || 0) + 1
-        );
-      }
-    )
-      .then(() => {
-        sessionStorage.setItem(
-          chaveVisitante,
-          "true"
-        );
-      })
-      .catch((error) => {
-        console.error(
-          "Erro ao registrar visualização:",
-          error
-        );
-      });
-  }
-  onValue(
-    caminhoContador,
-    (snapshot) => {
-      const valor =
-        snapshot.val() || 0;
-      contador.textContent =
-        `${valor} visualizações`;
-    }
-  );
-}
+
+
+
 function configurarEfeitosBotoes() {
   const botoes =
     document.querySelectorAll(
