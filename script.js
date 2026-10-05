@@ -1,10 +1,3 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-import {
-  getDatabase,
-  ref,
-  runTransaction,
-  onValue,
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
 const API_URL =
   "https://sintele-api.onrender.com/api";
 const caminho =
@@ -28,21 +21,7 @@ const username =
         ultimoSegmento
       )
     : usernameUrl || "";
-const firebaseConfig = {
-  apiKey: "AIzaSyB1J5QXb9L0w9k1dQX0x9V5xJ5x5x5x5x",
-  authDomain: "sintele-tech.firebaseapp.com",
-  databaseURL:
-    "https://sintele-tech-default-rtdb.firebaseio.com",
-  projectId: "sintele-tech",
-  storageBucket: "sintele-tech.firebasestorage.app",
-  messagingSenderId: "1055586324567",
-  appId:
-    "1:1055586324567:web:0000000000000000000000",
-};
-const app =
-  initializeApp(firebaseConfig);
-const database =
-  getDatabase(app);
+
 const contato = {
   whatsapp: "",
   phone: "",
@@ -520,8 +499,6 @@ function configurarSalvarContato(
     URL.revokeObjectURL(url);
   };
 }
-
-
 
 function configurarEfeitosBotoes() {
   const botoes =
