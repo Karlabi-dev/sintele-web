@@ -2,276 +2,261 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <meta
       name="description"
       content="Perfil profissional digital no SINTELE."
     />
-
     <title>SINTELE | Perfil profissional</title>
-
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="script.js" />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M535DTRC1Q"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-M535DTRC1Q"
+    ></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-M535DTRC1Q');
-</script>
-
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-M535DTRC1Q");
+    </script>
   </head>
-
   <body>
     <main class="perfil">
-
       <header class="cabecalho">
         <div class="marca">
           <div class="marca-principal">
-            <img src="assets/logo.png" alt="Logo SINTELE" class="logo" />
-
+            <img
+              src="assets/logo.png"
+              alt="Logo SINTELE"
+              class="logo"
+            />
             <div class="marca-texto">
               <h1>SINTELE</h1>
-
-              <p>Identidade profissional digital</p>
+              <p>
+                Identidade profissional digital
+              </p>
             </div>
           </div>
         </div>
-
         <div class="nfc-status">
           <div class="nfc-icone">
             <span>◉</span>
           </div>
-
           <p>
             Perfil recebido<br />
             por NFC
           </p>
         </div>
       </header>
-
       <section class="card card-perfil">
         <div class="perfil-conteudo">
-
           <div class="foto-container">
-            <img src="assets/perfil.jpeg" alt="Foto de perfil" class="foto" />
-
-            <span class="selo-verificado"> ✓ </span>
+            <img
+              id="fotoPerfil"
+              src="assets/perfil.jpeg"
+              alt="Foto de perfil"
+              class="foto"
+            />
+            <span class="selo-verificado">
+              ✓
+            </span>
           </div>
-
           <div class="dados-perfil">
-            <h2>Karla Bianca</h2>
-
-            <h3>Desenvolvedora Full Stack</h3>
-
-            <strong> SINTELE Tech </strong>
-
-            <p>
-              Tecnologia, inovação e pessoas.<br />
-              Transformando ideias em soluções.
-            </p>
+            <h2 id="nomePerfil"></h2>
+            <h3 id="profissaoPerfil"></h3>
+            <strong id="empresaPerfil"></strong>
+            <p id="bioPerfil"></p>
           </div>
         </div>
         <div class="acoes">
-
-          <button type="button" id="salvarContato" class="botao botao-outline">
-            <span class="botao-icone"> ♙ </span>
-
-            <span> Salvar contato </span>
+          <button
+            type="button"
+            id="salvarContato"
+            class="botao botao-outline"
+          >
+            <span class="botao-icone">
+              ♙
+            </span>
+            <span>
+              Salvar contato
+            </span>
           </button>
-
           <a
-            href="https://wa.me/5585992455842"
+            id="botaoWhatsApp"
+            href="#"
             target="_blank"
             rel="noopener noreferrer"
             class="botao botao-outline"
           >
-            <span class="botao-icone whatsapp-icone"> ◉ </span>
-
-            <span> WhatsApp </span>
+            <span class="botao-icone whatsapp-icone">
+              ◉
+            </span>
+            <span>
+              WhatsApp
+            </span>
           </a>
-
-          <a href="#" class="botao botao-primary">
-            <span> Ver perfil completo </span>
-
-            <span class="botao-icone"> ↗ </span>
+          <a
+            id="botaoPerfilCompleto"
+            href="#"
+            class="botao botao-primary"
+          >
+            <span>
+              Ver perfil completo
+            </span>
+            <span class="botao-icone">
+              ↗
+            </span>
           </a>
         </div>
         <div id="contadorVisualizacoes">
-           👁️ 0 Visualizações
+          👁️ 0 Visualizações
         </div>
       </section>
-
       <section class="card card-informacoes">
         <div class="titulo-card">
-          <span class="titulo-icone"> 💼 </span>
-
-          <h2>Informações profissionais</h2>
+          <span class="titulo-icone">
+            💼
+          </span>
+          <h2>
+            Informações profissionais
+          </h2>
         </div>
-
         <div class="informacoes-grid">
-
           <div class="informacao">
-            <span class="informacao-icone"> ◉ </span>
-
+            <span class="informacao-icone">
+              ◉
+            </span>
             <div>
-              <small> Empresa </small>
-
-              <strong> SINTELE Tech </strong>
-            </div>
-          </div>
-
-
-          <div class="informacao">
-            <span class="informacao-icone"> ♙ </span>
-
-            <div>
-              <small> Cargo </small>
-
-              <strong> Desenvolvedora Full Stack </strong>
-            </div>
-          </div>
-
-          <div class="informacao">
-            <span class="informacao-icone"> ♧ </span>
-
-            <div>
-              <small> Localização </small>
-
-              <strong> Fortaleza, CE </strong>
+              <small>
+                Empresa
+              </small>
+              <strong id="empresaInfo"></strong>
             </div>
           </div>
           <div class="informacao">
-            <span class="informacao-icone"> &lt;/&gt; </span>
-
+            <span class="informacao-icone">
+              ♙
+            </span>
             <div>
-              <small> Profissão </small>
-
-              <strong> Desenvolvedora de Software </strong>
+              <small>
+                Cargo
+              </small>
+              <strong id="cargoInfo"></strong>
+            </div>
+          </div>
+          <div class="informacao">
+            <span class="informacao-icone">
+              ♧
+            </span>
+            <div>
+              <small>
+                Localização
+              </small>
+              <strong id="localizacaoInfo"></strong>
+            </div>
+          </div>
+          <div class="informacao">
+            <span class="informacao-icone">
+              &lt;/&gt;
+            </span>
+            <div>
+              <small>
+                Profissão
+              </small>
+              <strong id="profissaoInfo"></strong>
             </div>
           </div>
         </div>
       </section>
-
-      <section class="card card-redes">
+      <section
+        class="card card-redes"
+        id="cardRedes"
+        style="display: none;"
+      >
         <div class="titulo-card">
-          <span class="titulo-icone"> 🔗 </span>
-
-          <h2>Redes profissionais</h2>
+          <span class="titulo-icone">
+            🔗
+          </span>
+          <h2>
+            Redes profissionais
+          </h2>
         </div>
-
-        <div class="redes-grid">
-          <a
-            href="https://www.linkedin.com/in/karla-bianca-563734355/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="rede"
-          >
-            <div class="rede-icone linkedin">in</div>
-
-            <span> LinkedIn </span>
-          </a>
-
-          <a
-            href="https://github.com/karlabi-dev"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="rede"
-          >
-            <div class="rede-icone github">●</div>
-
-            <span> GitHub </span>
-          </a>
-
-          <a href="https://www.instagram.com/karla.bi_/" target="_blank" rel="noopener noreferrer" class="rede">
-            <div class="rede-icone instagram">◎</div>
-
-            <span> Instagram </span>
-          </a>
-
-
-          <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" class="rede">
-            <div class="rede-icone youtube">▶</div>
-
-            <span> YouTube </span>
-          </a>
-        </div>
+        <div
+          class="redes-grid"
+          id="redesGrid"
+        ></div>
       </section>
-
       <section class="card card-projetos">
         <div class="projetos-topo">
           <div class="titulo-card">
-            <span class="titulo-icone"> □ </span>
-
-            <h2>Projetos em destaque</h2>
+            <span class="titulo-icone">
+              □
+            </span>
+            <h2>
+              Projetos em destaque
+            </h2>
           </div>
-
-          <a href="https://github.com/karlabi-dev?tab=repositories" target="_blank" rel="noopener noreferrer" class="ver-todos">
+          <a
+            id="verTodosProjetos"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="ver-todos"
+          >
             Ver todos
-            <span>›</span>
+            <span>
+              ›
+            </span>
           </a>
         </div>
-
-        <div class="projetos-grid">
-          <article class="projeto">
-            <div class="projeto-imagem">
-              <span> TP </span>
-            </div>
-
-            <div class="projeto-info">
-              <h3>Trip Planner</h3>
-
-              <p>Plataforma de planejamento de viagens.</p>
-            </div>
-
-            <span class="projeto-seta"> › </span>
-          </article>
-
-          <article class="projeto">
-            <div class="projeto-imagem projeto-gastos">
-              <span> $ </span>
-            </div>
-
-            <div class="projeto-info">
-              <h3>Sistema de Gastos Pessoais</h3>
-
-              <p>Controle financeiro simples e eficiente.</p>
-            </div>
-
-            <span class="projeto-seta"> › </span>
-          </article>
-        </div>
+        <div
+          class="projetos-grid"
+          id="projetosGrid"
+        ></div>
       </section>
-
       <section class="card card-cta">
-        <div class="cta-icone">📱</div>
-
+        <div class="cta-icone">
+          📱
+        </div>
         <div class="cta-texto">
-          <h2>Gostou do SINTELE?</h2>
-
+          <h2>
+            Gostou do SINTELE?
+          </h2>
           <p>
             Tenha sua própria identidade profissional digital e faça parte dessa
             rede de conexões.
           </p>
         </div>
-
-        <a href="#" class="botao-download">
-          <span class="download-icone"> ↓ </span>
-
-          <span> Baixar o SINTELE </span>
+        <a
+          href="https://karlabi-dev.github.io/sintele-app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="botao-download"
+        >
+          <span class="download-icone">
+            ↓
+          </span>
+          <span>
+            Baixar o SINTELE
+          </span>
         </a>
       </section>
-
       <footer class="rodape">
         <span class="linha-footer"></span>
-
-        <p>Conectando pessoas, talentos e oportunidades.</p>
-
+        <p>
+          Conectando pessoas, talentos e oportunidades.
+        </p>
         <span class="linha-footer"></span>
       </footer>
     </main>
-    <script type="module" src="script.js"></script>
+    <script
+      type="module"
+      src="script.js"
+    ></script>
   </body>
 </html>
