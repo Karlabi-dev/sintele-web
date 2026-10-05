@@ -19,10 +19,8 @@ const parametros =
   new URLSearchParams(
     window.location.search
   );
-
 const usernameUrl =
   parametros.get("username");
-
 const username =
   ultimoSegmento &&
   ultimoSegmento !== "sintele-web"
@@ -526,13 +524,13 @@ function configurarContador() {
     document.getElementById(
       "contadorVisualizacoes"
     );
-  if (!contador) {
+  if (!contador || !username) {
     return;
   }
   const caminhoContador =
     ref(
       database,
-      "sintele/visualizações"
+      `sintele/visualizacoes/${username}`
     );
   const chaveVisitante =
     `sintele-visitou-${username}`;
@@ -548,11 +546,19 @@ function configurarContador() {
           (valorAtual || 0) + 1
         );
       }
-    );
-    sessionStorage.setItem(
-      chaveVisitante,
-      "true"
-    );
+    )
+      .then(() => {
+        sessionStorage.setItem(
+          chaveVisitante,
+          "true"
+        );
+      })
+      .catch((error) => {
+        console.error(
+          "Erro ao registrar visualização:",
+          error
+        );
+      });
   }
   onValue(
     caminhoContador,
