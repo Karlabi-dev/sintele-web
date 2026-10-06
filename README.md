@@ -1,54 +1,99 @@
-# SINTELE
+# SINTELE Web
 
 ### Sistema de Identidade, Networking e Tecnologia
 
-O SINTELE é uma plataforma de identidade profissional digital criada para facilitar a apresentação, o compartilhamento de informações profissionais e a conexão entre pessoas.
+O SINTELE Web é a página pública do ecossistema SINTELE. Ele apresenta o perfil profissional gerenciado pelo SINTELE App.
 
-## 🌐 SINTELE Web
+O SINTELE App e o SINTELE Web trabalham em conjunto: o aplicativo gerencia as informações do profissional e o Web apresenta essas informações em uma página pública.
 
-Este repositório contém o protótipo da página pública de perfil profissional do SINTELE.
+## 🌐 Perfil público
 
-A página pode ser acessada por:
+Cada profissional possui um endereço público baseado no seu username:
 
-- 🔗 Link
-- 📱 QR Code
-- 📡 NFC
+`https://sintele-web.vercel.app/{username}`
 
-## 🎯 Objetivo
+Exemplo:
 
-Criar uma identidade profissional digital que permita compartilhar rapidamente informações como:
+`https://sintele-web.vercel.app/karla-bianca`
 
-- Nome e profissão
+## 📋 Informações apresentadas
+
+O perfil público pode apresentar:
+
+- Nome
+- Foto de perfil
+- Cargo
+- Profissão
 - Empresa
-- Biografia profissional
-- Redes sociais
+- Biografia
+- Cidade e estado
 - Contatos
+- Redes sociais
 - Projetos
-- Portfólio
-- Currículo
-- Materiais profissionais
 
-## 🚀 Tecnologias
+Os dados são carregados através da API do SINTELE.
+
+## 🔗 Integração com o SINTELE App
+
+O fluxo atual entre os dois projetos é:
+
+```text
+SINTELE App
+     │
+     │ dados do profissional
+     ▼
+API SINTELE
+     │
+     ▼
+SINTELE Web
+     │
+     ├── Perfil público
+     ├── Link público
+     └── QR Code
+```
+
+O link público pode ser compartilhado diretamente pelo aplicativo ou utilizado na geração do QR Code.
+
+## 🎨 Interface
+
+A página pública foi desenvolvida para apresentar as informações profissionais de forma organizada e adaptada para dispositivos móveis.
+
+A página conta com seções para:
+
+- Perfil profissional
+- Informações profissionais
+- Redes sociais
+- Projetos
+- Contatos
+- Compartilhamento
+
+## 🛠️ Tecnologias
 
 - HTML5
 - CSS3
 - JavaScript
 
+## 🚀 Hospedagem
+
+O SINTELE Web está hospedado na **Vercel**.
+
+Perfil público de exemplo:
+
+**Karla Bianca**
+
+`https://sintele-web.vercel.app/karla-bianca`
+
 ## 📌 Status
 
-🚧 Em desenvolvimento — protótipo inicial.
+🚧 Em desenvolvimento.
 
-## 🔮 Futuro
+A página pública já está funcionando e integrada à API do SINTELE. O projeto continua recebendo melhorias conforme novas funcionalidades são desenvolvidas no SINTELE App.
 
-O projeto poderá evoluir para uma plataforma completa com:
+O botão de download do SINTELE permanece em desenvolvimento.
 
-- Cadastro e login
-- Perfis personalizados
-- Banco de dados
-- Conexões profissionais
-- Modo Evento
-- Integração com NFC
-- SINTELE Business
+## 🔮 Evolução do projeto
+
+O SINTELE Web acompanha a evolução do SINTELE App. Novos recursos serão adicionados conforme as funcionalidades de networking e outras áreas do aplicativo forem implementadas.
 
 ## 👩‍💻 Desenvolvedora
 
