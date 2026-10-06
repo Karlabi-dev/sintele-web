@@ -8,7 +8,7 @@ O SINTELE é uma plataforma de identidade profissional digital criada para facil
 
 Este repositório contém o protótipo da página pública de perfil profissional do SINTELE.
 
-A página poderá ser acessada por:
+A página pode ser acessada por:
 
 - 🔗 Link
 - 📱 QR Code
@@ -49,3 +49,17 @@ O projeto poderá evoluir para uma plataforma completa com:
 - Modo Evento
 - Integração com NFC
 - SINTELE Business
+
+## 👩‍💻 Desenvolvedora
+
+**Karla Bianca**  
+Desenvolvedora Full Stack e criadora do SINTELE.
+
+- 📧 E-mail: [karlabianca2319@gmail.com](mailto:karlabianca2319@gmail.com)
+- 💼 LinkedIn: [Karla Bianca](https://www.linkedin.com/in/karla-bianca-563734355/)
+- 📸 Instagram: [@karla.bi_](https://www.instagram.com/karla.bi_/)
+- 🐙 GitHub: [Karlabi-dev](https://github.com/Karlabi-dev)
+
+---
+
+**SINTELE — conectando pessoas, talentos e oportunidades.**
